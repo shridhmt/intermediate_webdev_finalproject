@@ -17,11 +17,21 @@ const calculate = () => {
 
 const calculateSimpleInterest = (principal, rate, time) => {
   return (principal * rate * time) / 100;
-}
+};
 
 const calculateTotalPayableAmount = (principal, interestAmount) => {
   return principal + interestAmount;
+};
+
+// Needed for browser
+if (typeof window !== "undefined") {
+  window.calculate = calculate;
 }
 
-
-window.calculate = calculate;
+// Needed for Jasmine tests (Node environment)
+if (typeof module !== "undefined") {
+  module.exports = {
+    calculateSimpleInterest,
+    calculateTotalPayableAmount,
+  };
+}
